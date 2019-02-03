@@ -1,3 +1,3 @@
 function d = Dyc(u)
-    d=(Dy(u)-Dyt(u))/2
-return
+d = (DyF(u)+DyB(u))/2;
+end
