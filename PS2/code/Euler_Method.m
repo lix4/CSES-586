@@ -2,7 +2,7 @@ clear all;
 close all;
 clc;
 
-STEP_SIZE=[0.1,0.05,0.01,0.005,0.001];
+STEP_SIZE=[0.1,0.05,0.01,0.005,0.001,1];
 t=[1,2,3,4,5];
 
 for k = 1:size(t,2)
@@ -17,7 +17,7 @@ for k = 1:size(t,2)
         fprintf("Euler:: t:%f, y:%f, step_size:%i\n",t_n,y_n,current_ss);
         fprintf("Original:: t:%f, y:%f\n",t_n, original(t(k)));
     end
-    fprintf("################################################\n");
+    fprintf("######################################################\n");
 end
 
 
