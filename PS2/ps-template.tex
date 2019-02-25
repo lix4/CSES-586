@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage,url}
+\usepackage{mathrsfs,amsmath}
+\usepackage{graphicx}  
+\usepackage{float}
+
+\usepackage[letterpaper,top=1in,bottom=1in,left=1in,right=1in,nohead]{geometry}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{6pt}
+
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Unif}{Unif}
+
+\begin{document}
+\thispagestyle{empty}
+{\large{\bf CSE 586A  \hfill Xiwen Li}}\\
+
+{\LARGE{\bf Problem Set I}}
+\vspace{0.2\baselineskip}
+\hrule
+
+
+\begin{enumerate}
+%% Problem 1
+\item The problem is to compare solution on a differential equation using two different differential equations.
+
+Euler's approximation approximates both $v_{t}$ and $\phi_{t}$ in each iteration
+
+\begin{enumerate}
+
+	\item[(a)] 	$\frac{dy}{dt}+2y=2-e^{-4t}$\\
+	\newline
+	Let $\mu(t)=e(2t)$, $\mu'(t)=2e^{2t}$\\
+	\newline
+	Multiply both sides by $\mu(t)$: $\frac{de^{2t}y}{dt}+2e^{2t}y=2e^{2t}-e^{-2t}$\\
+	\newline
+	$\mu(t)\frac{dy}{dt}+\mu'(t)y=2e^{2t}-e^{-2t}$\\
+	\newline
+	$(\mu(t)y(t))'=2e^{2t}-e^{-2t}$\\
+	\newline
+	$y(t)=1+\frac{1}{2}e^{-4t}-\frac{C}{e^{2t}}$\\
+	\newline
+	Since $y(0)$=1,\\
+	\newline
+	$y(t)=1+\frac{1}{2}e^{-4t}-\frac{1}{2e^{2t}}$\\
+	
+	\item[(b)] We can rewrite the equation as: \\
+	\newline
+	$\frac{dy}{dt}=-2y+2-e^{-4t}$\\
+	\newline
+	Then the equation of Euler approximation is:\\
+	\newline
+	$d_{n+1}=d_{n}+h\frac{dy}{dt}$\\
+	$d_{n+1}=d_{n}+h(-2y+2-e^{-4t})$
+	\newline
+	\begin{table}[h!]
+		\begin{center}
+			
+			\label{tab:table1}
+			\begin{tabular}{llllll} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+				\textbf{step size} & \textbf{t = 1} & \textbf{t = 2}& \textbf{t = 3}& \textbf{t = 4}& \textbf{t = 5}\\
+				\hline
+				0.1 & 0.931324 & 0.991368 & 0.999050 & 0.999898 & 0.999989\\
+				0.05 & 0.936470 & 0.991113 & 0.998898 & 0.999866 & 0.999984\\
+				0.01 & 0.940499 & 0.991019 & 0.998789 & 0.999839 & 0.999979\\
+				0.005 & 0.940996 & 0.991014 & 0.998776 & 0.999836 & 0.999978\\
+				0.001 & 0.941391 & 0.991011 & 0.998766 & 0.999833 & 0.999977\\
+				\hline
+				original & 0.941490 & 0.991010 & 0.998764 & 0.999832 & 0.999977\\ 
+				\hline
+			\end{tabular}
+			\caption{Values by Euler's Method}
+		\end{center}
+	\end{table}
+	
+	\item[(c)]
+	
+	
+\end{enumerate}
+
+%% Problem 2
+\item 
+The problem is to use Euler's approximation to estimate the transformation at t = 1.
+
+At the very beginning, $v_{0}$ and $\phi_{0}$ are initialized. The initial image is defined by $I_{0}$. At each iteration, I approximate $v_{t}$ and $\phi_{t}$ using equation:
+
+\begin{equation}
+v_{t+1}=v_{t}+h*\frac{dv_{t}}{dt}
+\end{equation}
+
+\begin{equation}
+\phi_{t+1}=\phi_{t}+h*\frac{d\phi_{t}}{dt}
+\end{equation}
+
+h is the step size. Once I get transformation, Final image is interpolated by as equation (3):
+
+\begin{equation}
+I_{final}=I_{0}\circ \phi_{t=1}
+\end{equation}
+
+\begin{enumerate}
+
+\item
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{./code/result_a}
+		\caption{Final Image Transformed by (a)}
+		\label{fig:f_res_a}
+	\end{center}
+\end{figure}
+
+
+\item
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{./code/result_b}
+		\caption{Final Image Transformed by (b)}
+		\label{fig:f_res_b}
+	\end{center}
+\end{figure}
+
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}
