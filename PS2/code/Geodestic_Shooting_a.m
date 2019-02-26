@@ -20,6 +20,7 @@ v_ty=squeeze(v_t(2,:,:));
 % v_ty=zeros(100,100);
 v_t_flatten=reshape(v_t,[2,1,10000]);
 
+
 %%%%%% Define hyper-parameters
 h=0.001;
 final_t=1;
@@ -35,20 +36,19 @@ for k=1:final_t/h
     a=Dxc(v_tx).*v_tx+Dxc(v_ty).*v_ty;
     b=Dyc(v_tx).*v_tx+Dyc(v_ty).*v_ty;
     
-    trans=permute(v_t_flatten, [2,1,3]);
-%     size(v_t_flatten);
-%     size(trans);
-    square=v_t_flatten.*trans;
-%     size(square)
-    divergence=reshape(square(:,2,:)-square(:,1,:),[2,100,100]);
-    div_x=squeeze(divergence(1,:,:));
-    div_y=squeeze(divergence(2,:,:));
+%     trans=permute(v_t_flatten, [2,1,3]);
+%     square=v_t_flatten.*trans;
+%     divergence=reshape(square(:,2,:)-square(:,1,:),[2,100,100]);
+%     div_x=squeeze(divergence(1,:,:));
+%     div_y=squeeze(divergence(2,:,:));
+    div_x=Dxc(v_tx.*v_tx)+Dyc(v_tx.*v_ty);
+    div_y=Dxc(v_ty.*v_tx)+Dyc(v_ty.*v_ty);
     
     sum_x=a+div_x;
     sum_y=b+div_y;
     
-    v_tx=v_tx+double(h*f_smooth(sum_x,16));
-    v_ty=v_ty+double(h*f_smooth(sum_y,16));
+    v_tx=v_tx+h*double(f_smooth(sum_x,16));
+    v_ty=v_ty+h*double(f_smooth(sum_y,16));
     
 %     v_x=v_x+double(h*f_smooth(first+reshape(divergence,[2,100,100]),16));
 %     v_y=v_y+double(h*f_smooth())
@@ -61,6 +61,7 @@ figure
 imshow(I_final)
 title('2');
 imwrite(I_final,'result_a.jpg');
+% imshowpair(I,I_final)
 
 %%%%%% Functions
 
