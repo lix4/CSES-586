@@ -39,14 +39,14 @@ v_zero_out=v_PSet-v_mean;
 
 
 covar=v_zero_out.'*v_zero_out./21;
-[V,D]=eigs(covar);
+[V,D]=eigs(covar,136);
 % [V,D,W]=svd(covar);
 % eigenvalues decay
-% decay_arr=zeros([1,3]);
-% for j=1:3
-%     decay_arr(1,j)=D(j,j);
-% end
-% plot(1:1:3,decay_arr)
+decay_arr=zeros([1,136]);
+for j=1:136
+    decay_arr(1,j)=D(j,j);
+end
+plot(1:1:136,decay_arr)
 
 
 ev1=D(1,1);
